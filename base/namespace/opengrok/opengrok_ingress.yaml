@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: opengrok
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`opengrok.example.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: opengrok
+          port: 8080
+  tls:
+    secretName: opengrok.example.com
