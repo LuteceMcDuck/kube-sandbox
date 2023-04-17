@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opengrok
+  labels:
+    app: opengrok
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opengrok
+  template:
+    metadata:
+      labels:
+        app: opengrok
+    spec:
+      containers:
+        - image: opengrok/docker:1.11
+          name: opengrok
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          # volumeMounts:
+          #   - mountPath: /var/opengrok/etc
+          #     name: config
+          #   - mountPath: /var/opengrok/data
+          #     name: data
+          #   - mountPath: /var/opengrok/src
+          #     name: source
